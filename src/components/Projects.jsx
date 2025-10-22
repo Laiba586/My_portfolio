@@ -9,25 +9,14 @@ function drivePreview(url) {
   return id ? `https://drive.google.com/file/d/${id}/preview` : url
 }
 
-const mini = [
+ 
+
+const advanced = [
   {
     title: 'Tools Base Website',
     video: 'https://drive.google.com/file/d/1TUhP5BUBRO7E1EiKZNkr5eF1PgJrf6Hc/view?usp=drive_link',
     desc: 'A text utility tool for converting, formatting, and cleaning text efficiently.'
   },
-  {
-    title: 'To-Do List App',
-    video: 'https://drive.google.com/file/d/1z9SBrgRCUpzbD3jJyzkBzxrvLcCBlfoq/view?usp=drive_link',
-    desc: 'A minimal app to add, update, and delete daily tasks with database integration.'
-  },
-  {
-    title: 'Weather App',
-    video: 'https://drive.google.com/file/d/16X7_AMDjQLDGnrVKNk3rU_ZN86XTdRcH/view?usp=drive_link',
-    desc: 'Displays real-time temperature and weather conditions using a weather API.'
-  }
-]
-
-const advanced = [
   {
     title: 'Blog App',
     video: 'https://drive.google.com/file/d/1C_c37kYfarJ_xoBTmQOwhWp7jXjn7A2J/view?usp=drive_link',
@@ -69,40 +58,9 @@ export default function Projects() {
       <div className="container-max">
         <SectionTitle title="My Portfolio" />
 
-        <h3 className="mt-12 text-2xl sm:text-3xl font-extrabold text-center text-white">Django Mini Projects Showcase</h3>
-        <p className="mt-6 text-center text-slate-300 max-w-3xl mx-auto">
-          These projects helped me understand the basics of Django’s MVT pattern and how to build clean UIs with Bootstrap inside Django apps.
-          They reflect my early hands‑on experience turning ideas into working features with solid structure and readable code.
-        </p>
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {mini.map((p, idx) => (
-            <motion.div
-              key={p.title}
-              className="card p-4 border-white/10 cursor-pointer"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: idx * 0.05 }}
-              whileHover={{ scale: 1.02 }}
-              onClick={() => openVideo(p.video)}
-            >
-              <div className="aspect-video rounded-xl bg-white/5 border border-white/10 overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/25 to-accent2/25" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-white font-extrabold text-lg">Django Mini Projects</div>
-                    <div className="text-slate-300 text-xs mt-1">Click to watch demo</div>
-                  </div>
-                </div>
-              </div>
-              <h4 className="mt-3 font-bold">{p.title}</h4>
-              <p className="mt-1 text-slate-400 text-sm">{p.desc}</p>
-              <button onClick={() => openVideo(p.video)} className="btn-secondary mt-3">Watch Demo</button>
-            </motion.div>
-          ))}
-        </div>
+        
 
-        <h3 className="mt-20 text-2xl sm:text-3xl font-extrabold text-center text-white">Django Advanced Projects Showcase</h3>
+        <h3 className="mt-20 text-2xl sm:text-3xl font-extrabold text-center text-white">Django Practical Projects Showcase</h3>
         <p className="mt-6 text-center text-slate-300 max-w-3xl mx-auto">
           These projects strengthened my real‑world development skills, including API integration, category‑based features, and hands‑on work
           with advanced packages and libraries to build scalable and maintainable systems.
