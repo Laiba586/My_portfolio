@@ -12,7 +12,7 @@ function drivePreview(url) {
 const mini = [
   {
     title: 'Tools Base Website',
-    video: '',
+    video: 'https://drive.google.com/file/d/1TUhP5BUBRO7E1EiKZNkr5eF1PgJrf6Hc/view?usp=drive_link',
     desc: 'A text utility tool for converting, formatting, and cleaning text efficiently.'
   },
   {
@@ -143,7 +143,7 @@ export default function Projects() {
               exit={{ opacity: 0 }}
             >
               <motion.div
-                className="w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden border border-white/10 relative"
+                className="w-full max-w-5xl bg-black rounded-xl overflow-hidden border border-white/10 relative"
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 20, opacity: 0 }}
@@ -158,18 +158,19 @@ export default function Projects() {
                   Close
                 </button>
                 {src ? (
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full aspect-video">
                     {/* Mask Google Drive top bar (hide toolbar + intercept clicks) */}
                     <div className="absolute top-0 left-0 right-0 h-20 bg-black z-10 pointer-events-auto" />
                     <iframe
                       src={src}
                       title="Project Preview"
                       allow="autoplay; fullscreen"
-                      className="w-full h-full"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
                     />
                   </div>
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-slate-300">Preview coming soon</div>
+                  <div className="relative w-full aspect-video flex items-center justify-center text-slate-300">Preview coming soon</div>
                 )}
               </motion.div>
             </motion.div>
