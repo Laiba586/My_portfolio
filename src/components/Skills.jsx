@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Element } from 'react-scroll'
 import SectionTitle from './SectionTitle'
 import { 
   SiHtml5, SiCss3, SiBootstrap, SiJavascript, SiPython, SiDjango, SiGithub 
@@ -20,21 +21,22 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section className="section" id="skills">
-      <div className="container-max">
-        <SectionTitle title="Skills" subtitle="Technologies I work with across backend, APIs, and databases." />
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {skills.map(({ name, icon: Icon, color }) => (
-            <motion.div key={name} whileHover={{ y: -6, scale: 1.04 }} className="group card p-5 text-center border-white/10">
-              <div className="flex justify-center">
-                <Icon size={36} style={{ color }} title={name} />
-              </div>
-              <div className="mt-3 text-sm font-semibold">{name}</div>
-              <div className="opacity-0 group-hover:opacity-100 transition text-xs text-slate-400 mt-1">{name}</div>
-            </motion.div>
-          ))}
+    <Element name="skills">
+      <section className="section mt-24 mb-24" id="skills">
+        <div className="container-max">
+          <div className="mt-16 lg:mt-24 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 lg:gap-12 place-items-center">
+            {skills.map(({ name, icon: Icon, color }) => (
+              <motion.div key={name} whileHover={{ y: -6, scale: 1.04 }} className="group card p-6 text-center border-white/10">
+                <div className="flex justify-center">
+                  <Icon size={36} style={{ color }} title={name} />
+                </div>
+                <div className="mt-3 text-sm font-semibold">{name}</div>
+                <div className="opacity-0 group-hover:opacity-100 transition text-xs text-slate-400 mt-1">{name}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Element>
   )
 }

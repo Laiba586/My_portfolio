@@ -1,5 +1,7 @@
 import SectionTitle from './SectionTitle'
 import { motion } from 'framer-motion'
+import { SiHtml5, SiCss3, SiBootstrap, SiPython, SiDjango, SiSqlite, SiMysql, SiPostgresql } from 'react-icons/si'
+import { MdOutlineApi } from 'react-icons/md'
 
 const items = [
   {
@@ -36,6 +38,18 @@ const items = [
   },
 ]
 
+const expSkills = [
+  { name: 'HTML', icon: SiHtml5, color: '#E44D26' },
+  { name: 'CSS', icon: SiCss3, color: '#1572B6' },
+  { name: 'Bootstrap', icon: SiBootstrap, color: '#7952B3' },
+  { name: 'Python', icon: SiPython, color: '#3776AB' },
+  { name: 'Django', icon: SiDjango, color: '#0C4B33' },
+  { name: 'DRF / REST APIs', icon: MdOutlineApi, color: '#ef4444' },
+  { name: 'SQLite', icon: SiSqlite, color: '#0f9ed8' },
+  { name: 'MySQL', icon: SiMysql, color: '#00758F' },
+  { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
+]
+
 export default function Experience() {
   return (
     <section className="section" id="experience">
@@ -66,6 +80,40 @@ export default function Experience() {
                   </ul>
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-28 space-y-10">
+          <div className="flex flex-wrap items-center justify-center gap-8">
+            {expSkills.slice(0, 5).map(({ name, icon: Icon, color }) => (
+              <div
+                key={name}
+                className="w-20 h-20 rounded-3xl ring-1 ring-[#8EE7F0] bg-[#E0F7FA] flex items-center justify-center shadow-xl shadow-black/30 hover:scale-105 transition"
+                title={name}
+                aria-label={name}
+              >
+                {name === 'DRF / REST APIs' ? (
+                  <span className="font-extrabold" style={{ color, fontSize: 20 }}>DRF</span>
+                ) : (
+                  <Icon size={38} style={{ color }} />
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-8">
+            {expSkills.slice(5).map(({ name, icon: Icon, color }) => (
+              <div
+                key={name}
+                className="w-20 h-20 rounded-3xl ring-1 ring-[#8EE7F0] bg-[#E0F7FA] flex items-center justify-center shadow-xl shadow-black/30 hover:scale-105 transition"
+                title={name}
+                aria-label={name}
+              >
+                {name === 'DRF / REST APIs' ? (
+                  <span className="font-extrabold" style={{ color, fontSize: 20 }}>DRF</span>
+                ) : (
+                  <Icon size={38} style={{ color }} />
+                )}
+              </div>
             ))}
           </div>
         </div>
