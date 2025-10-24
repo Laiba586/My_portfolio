@@ -22,9 +22,9 @@ const skills = [
 export default function Skills() {
   return (
     <Element name="skills">
-      <section className="section mt-24 mb-24" id="skills">
+      <section className="section" id="skills">
         <div className="container-max">
-          <div className="mt-16 lg:mt-24 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 lg:gap-12 place-items-center">
+          <div className="mt-8 lg:mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 lg:gap-12 place-items-center">
             {skills.map(({ name, icon: Icon, color }) => (
               <motion.div key={name} whileHover={{ y: -6, scale: 1.04 }} className="group card p-6 text-center border-white/10">
                 <div className="flex justify-center">

@@ -13,7 +13,7 @@ body {
 }
 
 .container-max { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16; }
-.section { @apply py-20 sm:py-24 lg:py-36; }
+.section { @apply py-10 sm:py-14 lg:py-16; }
 .card { @apply bg-card/60 backdrop-blur border border-white/10 rounded-2xl; }
 .glow { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.6); animation: glow 3s infinite ease-in-out; }
 

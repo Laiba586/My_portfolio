@@ -1,12 +1,36 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Element } from 'react-scroll'
 import SectionTitle from './SectionTitle'
 
 // 👇 Function to generate Google Drive thumbnail
-function driveThumb(link) {
-  const match = link.match(/\/d\/(.*?)\//)
-  return match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000` : ''
+function getDriveId(link) {
+  const dMatch = link.match(/\/d\/([a-zA-Z0-9_-]{10,})\//)
+  if (dMatch && dMatch[1]) return dMatch[1]
+  const idParam = link.match(/[?&]id=([a-zA-Z0-9_-]{10,})/)
+  if (idParam && idParam[1]) return idParam[1]
+  return ''
 }
+
+function driveThumb(link) {
+  const id = getDriveId(link)
+  return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w1000` : ''
+}
+const fallbackDataUri =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1f2937"/>
+        <stop offset="100%" stop-color="#0f172a"/>
+      </linearGradient>
+    </defs>
+    <rect width="800" height="450" fill="url(#g)"/>
+    <circle cx="400" cy="225" r="60" fill="rgba(255,255,255,0.15)"/>
+    <polygon points="385,195 445,225 385,255" fill="rgba(255,255,255,0.85)"/>
+  </svg>
+`)
 
 const projects = [
   {
@@ -79,9 +103,14 @@ const projects = [
 ]
 
 export default function Projects() {
+  const [activeId, setActiveId] = useState('')
+  const [videoError, setVideoError] = useState(false)
+  useEffect(() => {
+    setVideoError(false)
+  }, [activeId])
   return (
     <Element name="projects">
-      <section className="section mt-24 mb-24" id="projects">
+      <section className="section" id="projects">
         <div className="container-max">
           <SectionTitle
             title="My Portfolio"
@@ -101,13 +130,33 @@ export default function Projects() {
                 className="card p-4 md:p-6 border border-white/10 bg-white/5 rounded-2xl shadow-lg transition"
               >
                 <div className="relative rounded-lg overflow-hidden">
-                  <a href={p.video} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={p.video}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const id = getDriveId(p.video)
+                      if (id) setActiveId(id)
+                    }}
+                  >
                     <img
-                      src={driveThumb(p.video)}
+                      src={driveThumb(p.video) || fallbackDataUri}
                       alt={p.title}
                       className="rounded-lg w-full h-48 object-cover"
+                      style={{
+                        objectPosition:
+                          i === 1 ? 'center 65%' :
+                          i === 3 ? 'center 68%' :
+                          i === 4 ? 'center 65%' :
+                          'center 55%',
+                        clipPath:
+                          i === 1 ? 'inset(18% 0 0 0)' :
+                          i === 3 ? 'inset(20% 0 0 0)' :
+                          i === 4 ? 'inset(18% 0 0 0)' :
+                          'inset(12% 0 0 0)'
+                      }}
                       onError={(e) => {
-                        e.currentTarget.src = '/fallback-thumbnail.png'
+                        e.currentTarget.onerror = null
+                        e.currentTarget.src = fallbackDataUri
                       }}
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 flex justify-center items-center text-white text-sm font-medium transition">
@@ -127,9 +176,38 @@ export default function Projects() {
               </motion.div>
             ))}
           </div>
+          {activeId && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+              <div className="relative w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-2xl">
+                <button
+                  className="absolute top-2 right-2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded px-3 py-1 text-sm"
+                  onClick={() => setActiveId('')}
+                >
+                  Close
+                </button>
+                {!videoError ? (
+                  <video
+                    key={activeId}
+                    className="w-full aspect-video"
+                    controls
+                    src={`https://drive.google.com/uc?export=download&id=${activeId}`}
+                    onError={() => setVideoError(true)}
+                  />
+                ) : (
+                  <iframe
+                    key={`${activeId}-fallback`}
+                    className="w-full aspect-video"
+                    src={`https://drive.google.com/file/d/${activeId}/preview`}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    title="Video preview"
+                  />
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </Element>
   )
 }
-
