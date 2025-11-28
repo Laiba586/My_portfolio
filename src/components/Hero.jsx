@@ -24,7 +24,7 @@ export default function Hero() {
         </h1>
 
         <h2 className="text-2xl md:text-3xl font-semibold text-slate-300 mb-4">
-          Python Full Stack Developer
+          Django Backend Developer
         </h2>
 
         <p className="text-slate-400 text-lg mb-8">
