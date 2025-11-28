@@ -21,7 +21,7 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <div className="leading-tight">
                 <div className="text-base sm:text-lg font-bold tracking-tight text-white">Laiba Aslam</div>
-                <div className="text-[11px] sm:text-xs text-slate-300">Web Developer</div>
+                <div className="text-[11px] sm:text-xs text-slate-300">Backend Developer</div>
               </div>
             </div>
 
