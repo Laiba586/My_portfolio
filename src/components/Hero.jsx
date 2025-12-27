@@ -34,12 +34,14 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex gap-4 justify-center">
-          <button
-            onClick={() => scrollToSection("projects")}
-            className="px-6 py-3 rounded-xl bg-[#3dd1e7] text-white font-semibold shadow-md hover:scale-105 transition"
+          <a
+            href="https://drive.google.com/file/d/1wwxxYTO-1atA-Kv1AnAT3O3pf-M3JDxU/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 rounded-xl bg-[#3dd1e7] text-white font-semibold shadow-md hover:scale-105 transition inline-block"
           >
-            View My Work
-          </button>
+            View My Resume
+          </a>
 
           <button
             onClick={() => scrollToSection("contact")}
