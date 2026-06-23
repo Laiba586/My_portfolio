@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import { Element } from 'react-scroll'
 import SectionTitle from './SectionTitle'
 
-// 👇 Function to generate Google Drive thumbnail
 function getDriveId(link) {
   const dMatch = link.match(/\/d\/([a-zA-Z0-9_-]{10,})\//)
   if (dMatch && dMatch[1]) return dMatch[1]
@@ -16,6 +15,7 @@ function driveThumb(link) {
   const id = getDriveId(link)
   return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w1000` : ''
 }
+
 const fallbackDataUri =
   'data:image/svg+xml;utf8,' +
   encodeURIComponent(`
@@ -102,34 +102,65 @@ const projects = [
   },
 ]
 
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } }
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+}
+
 export default function Projects() {
   const [activeId, setActiveId] = useState('')
   const [videoError, setVideoError] = useState(false)
-  useEffect(() => {
-    setVideoError(false)
-  }, [activeId])
+  useEffect(() => { setVideoError(false) }, [activeId])
+
   return (
     <Element name="projects">
       <section className="section" id="projects">
         <div className="container-max">
-          <SectionTitle
-            title="My Portfolio"
-            subtitle="Django Practical Projects Showcase"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
+            <SectionTitle title="My Portfolio" subtitle="Django Practical Projects Showcase" />
+          </motion.div>
 
-          <p className="mt-6 text-center text-slate-300 max-w-3xl mx-auto">
+          <motion.p
+            className="mt-6 text-center text-slate-300 max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             These projects strengthened my real-world development skills, including API integration, category-based features,
             and hands-on work with advanced packages and libraries to build scalable and maintainable systems.
-          </p>
+          </motion.p>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {projects.map((p, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.02 }}
-                className="card p-4 md:p-6 border border-white/10 bg-white/5 rounded-2xl shadow-lg transition"
+                variants={cardVariants}
+                whileHover={{
+                  scale: 1.03,
+                  y: -6,
+                  boxShadow: '0 0 32px rgba(61,209,231,0.22)',
+                }}
+                transition={{ duration: 0.25 }}
+                className="card p-4 md:p-6 border border-white/10 bg-white/5 rounded-2xl shadow-lg"
               >
-                <div className="relative rounded-lg overflow-hidden">
+                <div className="relative rounded-lg overflow-hidden group">
                   <a
                     href={p.video}
                     onClick={(e) => {
@@ -138,10 +169,10 @@ export default function Projects() {
                       if (id) setActiveId(id)
                     }}
                   >
-                    <img
+                    <motion.img
                       src={driveThumb(p.video) || fallbackDataUri}
                       alt={p.title}
-                      className="rounded-lg w-full h-48 object-cover"
+                      className="rounded-lg w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
                       style={{
                         objectPosition:
                           i === 1 ? 'center 65%' :
@@ -159,13 +190,13 @@ export default function Projects() {
                         e.currentTarget.src = fallbackDataUri
                       }}
                     />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 flex justify-center items-center text-white text-sm font-medium transition">
-                      Click to watch demo
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex justify-center items-center text-white text-sm font-medium transition-opacity duration-300">
+                      ▶ Click to watch demo
                     </div>
                   </a>
                 </div>
 
-                <h3 className="mt-4 text-lg font-semibold">{p.title}</h3>
+                <h3 className="mt-4 text-lg font-semibold text-white">{p.title}</h3>
                 <p className="text-sm text-slate-400 mt-1">{p.desc}</p>
 
                 <ul className="mt-3 space-y-1 text-sm text-slate-300 list-disc list-inside">
@@ -175,12 +206,23 @@ export default function Projects() {
                 </ul>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
+
           {activeId && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-              <div className="relative w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-2xl">
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                className="relative w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-2xl"
+                initial={{ scale: 0.85, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
                 <button
-                  className="absolute top-2 right-2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded px-3 py-1 text-sm"
+                  className="absolute top-2 right-2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded px-3 py-1 text-sm z-10"
                   onClick={() => setActiveId('')}
                 >
                   Close
@@ -203,8 +245,8 @@ export default function Projects() {
                     title="Video preview"
                   />
                 )}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           )}
         </div>
       </section>

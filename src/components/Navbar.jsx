@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-scroll'
 import { FiMenu, FiX } from 'react-icons/fi'
+import profileImg from '../assets/profile.png'
 
 const navItems = [
   { to: 'about', label: 'About' },
@@ -17,11 +18,17 @@ export default function Navbar() {
       <div className="container-max">
         <div className="mt-4 rounded-2xl border border-white/10 bg-card/60 backdrop-blur shadow-glow">
           <div className="flex items-center justify-between px-4 py-3">
-            {/* Logo + Name */}
+            {/* Logo + Name + Photo */}
             <div className="flex items-center gap-3">
+              <img
+                src={profileImg}
+                alt="Laiba Aslam"
+                className="w-10 h-10 rounded-full object-cover border-2 border-[#3ccfcf] shadow-md"
+                onError={(e) => { e.currentTarget.style.display = 'none' }}
+              />
               <div className="leading-tight">
                 <div className="text-base sm:text-lg font-bold tracking-tight text-white">Laiba Aslam</div>
-                <div className="text-[11px] sm:text-xs text-slate-300">Backend Developer</div>
+                <div className="text-[11px] sm:text-xs text-slate-300">Django Web Developer</div>
               </div>
             </div>
 

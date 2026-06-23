@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 
 export default function Hero() {
-  // Smooth scroll function
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -10,7 +9,9 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen px-8 md:px-20 bg-slate-900 text-center overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center min-h-screen px-8 md:px-20 text-center overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #0f1a2e 0%, #0b1020 60%, #0b1020 100%)' }}
+    >
       {/* Main Content */}
       <motion.div
         className="z-10 max-w-3xl"
@@ -24,12 +25,12 @@ export default function Hero() {
         </h1>
 
         <h2 className="text-2xl md:text-3xl font-semibold text-slate-300 mb-4">
-          Django Backend Developer
+          Django Web Developer
         </h2>
 
         <p className="text-slate-400 text-lg mb-8">
-          I design, develop, and maintain dynamic backend systems and interactive web applications
-          with a passion for clean code and problem-solving.
+          I design, develop, and deploy full stack web applications — from powerful Django REST APIs
+          to responsive, user-friendly frontends — with a passion for clean code and real-world impact.
         </p>
 
         {/* Buttons */}
