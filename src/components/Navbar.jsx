@@ -6,7 +6,7 @@ import profileImg from '../assets/profile.png'
 
 const navItems = [
   { to: 'about', label: 'About' },
-  { to: 'experience', label: 'Experience' },
+  { to: 'Experience', label: 'Services' },
   { to: 'projects', label: 'Portfolio' },
   { to: 'contact', label: 'Contact' },
 ]
