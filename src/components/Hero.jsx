@@ -31,25 +31,30 @@ export default function Hero() {
   }, [displayedText, isDeleting, wordIndex]);
 
   return (
-    <section className="relative flex flex-row items-center justify-between min-h-screen px-10 md:px-24 overflow-hidden" style={{ paddingTop: '5rem' }}>
+    // FIX: overflow-x-hidden add kiya hai taake side scroll na ho
+    <section className="relative flex flex-col lg:flex-row items-center justify-center lg:justify-between min-h-screen px-6 md:px-24 overflow-x-hidden" style={{ paddingTop: '5rem' }}>
       
-      {/* LEFT SIDE: UNTOUCHED */}
-      <div className="z-10 max-w-4xl">
-        <p className="uppercase text-white text-[1.4rem] font-bold tracking-[0.25em] mb-6">Hi There, I'm</p>
-        <h1 className="text-[clamp(4rem,8vw,8rem)] font-black text-[#3dd1e7] leading-none mb-6 whitespace-nowrap" style={{ textShadow: "0 0 50px rgba(61,209,231,0.6)" }}>
+      {/* LEFT SIDE: Responsive layout ke liye items-center lg:items-start */}
+      <div className="z-10 w-full max-w-4xl text-center lg:text-left flex flex-col items-center lg:items-start mt-10 lg:mt-0">
+        <p className="uppercase text-white text-[1rem] sm:text-[1.4rem] font-bold tracking-[0.25em] mb-4">Hi There, I'm</p>
+        
+        {/* FIX: whitespace-nowrap ko hataya taake mobile par wrap ho jaye aur cut na ho */}
+        <h1 className="text-[clamp(2.5rem,8vw,8rem)] font-black text-[#3dd1e7] leading-none mb-6 break-words" style={{ textShadow: "0 0 50px rgba(61,209,231,0.6)" }}>
           Laiba Aslam
         </h1>
-        <div className="text-[clamp(1.4rem,3vw,2.2rem)] font-semibold text-white mb-10 min-h-[3.5rem] flex items-center">
+        
+        <div className="text-[clamp(1.1rem,3vw,2.2rem)] font-semibold text-white mb-8 min-h-[3.5rem] flex items-center justify-center lg:justify-start">
           {displayedText}
         </div>
-        <div className="flex flex-wrap gap-4 mb-14">
-          <button onClick={() => scrollToSection("projects")} className="px-10 py-4 rounded-xl font-bold text-gray-900 bg-gradient-to-r from-[#3dd1e7] to-[#2aa9b0]">View My Work →</button>
-          <button onClick={() => scrollToSection("contact")} className="px-10 py-4 rounded-xl font-bold text-[#3dd1e7] border-2 border-[#3dd1e7]">Hire Me</button>
+        
+        <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-14">
+          <button onClick={() => scrollToSection("projects")} className="px-8 py-3 rounded-xl font-bold text-gray-900 bg-gradient-to-r from-[#3dd1e7] to-[#2aa9b0]">View My Work →</button>
+          <button onClick={() => scrollToSection("contact")} className="px-8 py-3 rounded-xl font-bold text-[#3dd1e7] border-2 border-[#3dd1e7]">Hire Me</button>
         </div>
       </div>
 
-      {/* RIGHT SIDE: ORB & ROTATING ICONS (Shifted up and left) */}
-      <div className="relative mr-20 lg:flex items-center justify-center pointer-events-none mt-0">
+      {/* RIGHT SIDE: ORB UNTOUCHED (Sirf container ko mobile responsive banaya) */}
+      <div className="relative flex items-center justify-center pointer-events-none mt-10 lg:mt-0 scale-75 sm:scale-90 lg:scale-100">
         <div className="relative w-[500px] h-[500px] flex items-center justify-center">
           
           <div className="absolute w-[250px] h-[250px] rounded-full border-2 border-[#3dd1e7]/50 bg-white/5 backdrop-blur-xl shadow-[0_0_25px_rgba(61,209,231,0.4)]" />
@@ -82,3 +87,4 @@ export default function Hero() {
     </section>
   );
 }
+  

@@ -58,19 +58,19 @@ export default function Skills() {
 
   return (
     <Element name="skills">
-      <section className="section overflow-hidden" id="skills" style={{ background: 'linear-gradient(135deg, #060d1f 0%, #0b1020 50%, #0a1628 100%)', paddingTop: '8rem' }}>
-        <div className="container-max">
+      <section className="section overflow-hidden w-full" id="skills" style={{ background: 'linear-gradient(135deg, #060d1f 0%, #0b1020 50%, #0a1628 100%)', paddingTop: '6rem' }}>
+        <div className="container-max w-full">
           {/* Heading */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.8, ease }}
-            className="text-center mb-6"
+            className="text-center mb-4"
           >
             <h2
               className="font-semibold tracking-normal text-white"
-              style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', color: '#3dd1e7' }}
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', color: '#3dd1e7' }}
             >
               My Skills
             </h2>
@@ -82,8 +82,8 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.8, ease, delay: 0.1 }}
-            className="text-center text-slate-400 mb-16"
-            style={{ fontSize: '1rem', maxWidth: '600px', margin: '0 auto 4rem auto' }}
+            className="text-center text-slate-400 px-4 mb-10 sm:mb-16"
+            style={{ fontSize: '0.95rem', maxWidth: '600px', margin: '0 auto 3rem auto' }}
           >
             Technologies I use to build full-stack web applications.
           </motion.p>
@@ -94,13 +94,13 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.8, ease, delay: 0.15 }}
-            className="flex flex-wrap justify-center gap-6 mb-20"
+            className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-12 sm:mb-20 px-4"
           >
             {categories.map((category) => (
               <motion.button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className="relative px-10 py-4 rounded-full font-medium transition-all duration-300"
+                className="relative px-5 py-2.5 sm:px-10 sm:py-4 rounded-full font-medium text-xs sm:text-base transition-all duration-300"
                 style={{
                   background: activeCategory === category.id 
                     ? 'rgba(61, 209, 231, 0.1)' 
@@ -126,7 +126,7 @@ export default function Skills() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 max-w-7xl mx-auto px-4"
+              className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-10 max-w-7xl mx-auto px-4"
             >
               {skillsData[activeCategory].map((skill, index) => (
                 <motion.div
@@ -134,20 +134,19 @@ export default function Skills() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease, delay: index * 0.05 }}
-                  whileHover={{ y: -8 }}
-                  className="group relative overflow-hidden rounded-3xl border border-[#3dd1e7]/20 bg-white/[0.05] p-12 shadow-xl backdrop-blur-xl transition-all duration-350 hover:border-[#3dd1e7]/50"
+                  whileHover={{ y: -6 }}
+                  className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#3dd1e7]/20 bg-white/[0.05] p-5 sm:p-10 lg:p-12 shadow-xl backdrop-blur-xl transition-all duration-350 hover:border-[#3dd1e7]/50 flex flex-col items-center justify-center min-h-[140px] sm:min-h-[220px]"
                 >
-                  <div className="flex justify-center mb-10">
+                  <div className="flex justify-center mb-4 sm:mb-8 lg:mb-10">
                     <skill.icon 
-                      size={64} 
-                      className="text-[#3dd1e7] transition-transform duration-350 group-hover:scale-110"
+                      className="text-[#3dd1e7] transition-transform duration-350 group-hover:scale-110 text-4xl sm:text-5xl lg:text-6xl"
                     />
                   </div>
-                  <h3 className="text-center text-white font-semibold text-lg mb-8">
+                  <h3 className="text-center text-white font-semibold text-xs sm:text-base lg:text-lg mb-4 sm:mb-6 break-words w-full px-1">
                     {skill.name}
                   </h3>
-                  {/* Decorative Bold Bottom Line */}
-                  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-[72%] h-1.5 rounded-full bg-gradient-to-r from-transparent via-[#3dd1e7]/70 to-[#3dd1e7]/90 shadow-[0_0_15px_rgba(61,209,231,0.4)]" />
+                  {/* Decorative Bottom Line */}
+                  <div className="absolute bottom-3 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 w-[72%] h-1 rounded-full bg-gradient-to-r from-transparent via-[#3dd1e7]/70 to-[#3dd1e7]/90 shadow-[0_0_15px_rgba(61,209,231,0.4)]" />
                 </motion.div>
               ))}
             </motion.div>
