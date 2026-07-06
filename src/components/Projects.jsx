@@ -1,121 +1,75 @@
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { Element } from 'react-scroll'
 import SectionTitle from './SectionTitle'
-
-function getDriveId(link) {
-  const dMatch = link.match(/\/d\/([a-zA-Z0-9_-]{10,})\//)
-  if (dMatch && dMatch[1]) return dMatch[1]
-  const idParam = link.match(/[?&]id=([a-zA-Z0-9_-]{10,})/)
-  if (idParam && idParam[1]) return idParam[1]
-  return ''
-}
-
-function driveThumb(link) {
-  const id = getDriveId(link)
-  return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w1000` : ''
-}
-
-const fallbackDataUri =
-  'data:image/svg+xml;utf8,' +
-  encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#1f2937"/>
-        <stop offset="100%" stop-color="#0f172a"/>
-      </linearGradient>
-    </defs>
-    <rect width="800" height="450" fill="url(#g)"/>
-    <circle cx="400" cy="225" r="60" fill="rgba(255,255,255,0.15)"/>
-    <polygon points="385,195 445,225 385,255" fill="rgba(255,255,255,0.85)"/>
-  </svg>
-`)
+import project1 from '../assets/Project1.png'
+import project2 from '../assets/Project2.png'
+import project3 from '../assets/Project3.png'
+import project4 from '../assets/Project4.png'
 
 const projects = [
   {
-    title: 'E-Commerce Website',
-    video: 'https://drive.google.com/file/d/1na7Bo_LVB5qEz_csqdPjlJalh6vL8ZGQ/view?usp=drive_link',
-    desc: 'A complete online store with product listings, cart, and checkout system.',
-    features: [
-      'Product catalog with categories and filtering',
-      'Product search functionality',
-      'Cart, checkout, and order flow',
-      'Admin product management',
-      'Order tracking with status updates',
-      'Payment integration (mock/sandbox)',
-    ],
+    title: 'Learning Management System',
+    desc: 'Complete LMS with live attendance, classroom management, and timetable scheduling.',
+    shortDesc: 'Complete LMS with attendance and timetable management.',
+    tags: ['Python', 'Django', 'HTML', 'CSS', 'JavaScript', 'Bootstrap', 'SQLite'],
+    image: project1,
+    bgPos: 'center 30%',
+    liveDemo: 'https://laiba586.pythonanywhere.com/',
+    github: 'https://github.com/Laiba586/Learning_Management_Project',
+    showGithub: true
   },
   {
     title: 'AI Resume Builder & Analyzer',
-    video: 'https://drive.google.com/file/d/1mMQcH9Ul5LbBIMQU7Q9ROmVhJkVFZqSn/view?usp=drive_link',
-    desc: 'AI-powered resume builder with REST APIs and JWT-secured authentication; analyzes resumes for gaps and strengths, suggests improvements, and offers modern, professional templates with live preview and export.',
-    features: [
-      'Resume parsing and scoring',
-      'AI-powered content suggestions',
-      'Export to PDF and shareable links',
-      'Modern templates and live preview',
-    ],
+    desc: 'AI-powered resume platform with JWT auth, REST APIs, and OpenAI integration.',
+    shortDesc: 'AI-powered resume builder with REST APIs and JWT auth.',
+    tags: ['Python', 'Django', 'DRF', 'REST APIs', 'JWT', 'PostgreSQL', 'OpenAI'],
+    image: project2,
+    bgPos: 'center 35%',
+    liveDemo: 'https://score-and-build.lovable.app/builder',
+    github: 'https://github.com/Laiba586/AI-resume-builder-backend',
+    showGithub: true
   },
   {
-    title: 'Learning Management System',
-    video: 'https://drive.google.com/file/d/1c7uMJ2MtAsKH7JiqdQRXyMItITGHAcJ1/view?usp=drive_link',
-    desc: 'LMS with student/teacher directories, live attendance with stored records, classroom and subject management, and full timetable/period scheduling.',
-    features: [
-      'Students and teachers record',
-      'Live attendance for students and teachers with database records',
-      'Classrooms and classes management',
-      'Subjects management and teacher assignments',
-      'Timetable and periods management',
-    ],
+    title: 'E-Commerce Website',
+    desc: 'Full online store with cart, checkout flow, and order management.',
+    shortDesc: 'Online store with cart, checkout and order tracking.',
+    tags: ['Python', 'Django', 'HTML', 'CSS', 'JavaScript', 'Bootstrap', 'SQLite'],
+    image: project3,
+    bgPos: 'center 20%',
+    liveDemo: 'https://laiba586-my-awesome-cart.hf.space/shop/',
+    github: 'https://github.com/Laiba586/MyAwesomeCart',
+    showGithub: true
   },
   {
-    title: 'Tools Base Website',
-    video: 'https://drive.google.com/file/d/1TUhP5BUBRO7E1EiKZNkr5eF1PgJrf6Hc/view?usp=drive_link',
-    desc: 'A text utility tool for converting, formatting, and cleaning text efficiently.',
-    features: [
-      'Text cleanup: punctuation removal, extra spaces, case conversion',
-      'Instant results with responsive UI',
-    ],
-  },
-  {
-    title: 'Blog App',
-    video: 'https://drive.google.com/file/d/1C_c37kYfarJ_xoBTmQOwhWp7jXjn7A2J/view?usp=drive_link',
-    desc: 'A blog system with user authentication, post management, and comment functionality.',
-    features: [
-      'User authentication and profiles',
-      'Create, edit, delete posts with rich content',
-      'Categories, tags, and search',
-      'Comments and moderation',
-    ],
-  },
-  {
-    title: 'Smart File Tools Platform',
-    video: 'https://drive.google.com/file/d/1tBaEL2Lxr5RnJdNhw38dCxi7jH64lLqm/view?usp=drive_link',
-    desc: 'A multipurpose web platform providing advanced file management tools for PDFs, images, and format conversions.',
-    features: [
-      'PDF, image, and file converters in one place',
-      'Secure upload and instant file processing',
-      'Subscription-based access for premium tools',
-      'Built with Django, REST APIs, and responsive UI',
-    ],
-  },
+    title: 'Smart AI Tools Platform',
+    desc: 'Multipurpose platform with AI-powered file processing and conversion tools.',
+    shortDesc: 'Multipurpose platform with AI-powered file processing.',
+    tags: ['Python', 'Django', 'DRF', 'PostgreSQL', 'HTML', 'CSS', 'JavaScript', 'React'],
+    image: project4,
+    bgPos: 'center center',
+    liveDemo: 'https://smallseotools.com/',
+    github: '#',
+    showGithub: false
+  }
 ]
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } }
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-}
-
 export default function Projects() {
-  const [activeId, setActiveId] = useState('')
-  const [videoError, setVideoError] = useState(false)
-  useEffect(() => { setVideoError(false) }, [activeId])
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [direction, setDirection] = useState(1)
+
+  const project = projects[currentIndex]
+
+  const handleNext = () => {
+    setDirection(1)
+    setCurrentIndex((prev) => (prev + 1) % projects.length)
+  }
+
+  const handlePrev = () => {
+    setDirection(-1)
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
+  }
 
   return (
     <Element name="projects">
@@ -125,129 +79,142 @@ export default function Projects() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <SectionTitle title="My Portfolio" subtitle="Django Practical Projects Showcase" />
+            <SectionTitle title="My Portfolio" />
           </motion.div>
 
           <motion.p
-            className="mt-6 text-center text-slate-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="mx-auto mt-8 max-w-2xl text-center text-[1.05rem] leading-7 text-white whitespace-nowrap"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
           >
-            These projects strengthened my real-world development skills, including API integration, category-based features,
-            and hands-on work with advanced packages and libraries to build scalable and maintainable systems.
+            A collection of my Django Web Application Projects.
           </motion.p>
 
-          <motion.div
-            className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-          >
-            {projects.map((p, i) => (
-              <motion.div
-                key={i}
-                variants={cardVariants}
-                whileHover={{
-                  scale: 1.03,
-                  y: -6,
-                  boxShadow: '0 0 32px rgba(61,209,231,0.22)',
-                }}
-                transition={{ duration: 0.25 }}
-                className="card p-4 md:p-6 border border-white/10 bg-white/5 rounded-2xl shadow-lg"
+          <div className="mt-20 flex flex-col items-center">
+            <div className="relative flex w-full items-center justify-center gap-4 sm:gap-6 lg:gap-10">
+
+              {/* Left Arrow */}
+              <button
+                aria-label="Previous project"
+                onClick={handlePrev}
+                className="absolute left-3 top-6 z-20 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-cyan-300/25 bg-slate-950/55 text-cyan-200 shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-300 ease-out hover:scale-115 hover:border-cyan-300/60 hover:bg-cyan-300/10 hover:text-white hover:shadow-[0_0_35px_rgba(61,209,231,0.45)] sm:static sm:h-[52px] sm:w-[52px]"
               >
-                <div className="relative rounded-lg overflow-hidden group">
-                  <a
-                    href={p.video}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      const id = getDriveId(p.video)
-                      if (id) setActiveId(id)
-                    }}
+                <FiChevronLeft size={24} />
+              </button>
+
+              {/* Card */}
+              <div className="w-full max-w-[850px] flex-1">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={project.title}
+                    initial={{ opacity: 0, x: direction > 0 ? 54 : -54, scale: 0.985 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: direction > 0 ? -28 : 28, scale: 0.985 }}
+                    whileHover={{ y: -10, scale: 1.01 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="group relative mx-auto min-h-[500px] w-full max-w-[850px] overflow-hidden rounded-[30px] border border-white/10 bg-slate-950/45 shadow-[0_30px_100px_rgba(0,0,0,0.58),0_0_0_1px_rgba(255,255,255,0.04)_inset] backdrop-blur-2xl transition-all duration-400 hover:shadow-[0_48px_150px_rgba(0,0,0,0.78),0_0_80px_rgba(61,209,231,0.22),0_0_0_1px_rgba(103,232,249,0.18)_inset] hover:border-[#3dd1e7]/30 sm:min-h-[520px] md:min-h-[540px]"
                   >
-                    <motion.img
-                      src={driveThumb(p.video) || fallbackDataUri}
-                      alt={p.title}
-                      className="rounded-lg w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                    {/* Background Image */}
+                    <div
+                      className="absolute inset-0 scale-100 opacity-70 blur-[0.5px] transition duration-700 ease-out group-hover:scale-112 group-hover:opacity-75"
                       style={{
-                        objectPosition:
-                          i === 1 ? 'center 65%' :
-                          i === 3 ? 'center 68%' :
-                          i === 4 ? 'center 65%' :
-                          'center 55%',
-                        clipPath:
-                          i === 1 ? 'inset(18% 0 0 0)' :
-                          i === 3 ? 'inset(20% 0 0 0)' :
-                          i === 4 ? 'inset(18% 0 0 0)' :
-                          'inset(12% 0 0 0)'
-                      }}
-                      onError={(e) => {
-                        e.currentTarget.onerror = null
-                        e.currentTarget.src = fallbackDataUri
+                        backgroundImage: `url(${project.image})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: project.bgPos,
                       }}
                     />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex justify-center items-center text-white text-sm font-medium transition-opacity duration-300">
-                      ▶ Click to watch demo
+
+                    {/* Dark overlay */}
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          'linear-gradient(to bottom, rgba(5,10,25,0.25), rgba(5,10,25,0.35), rgba(5,10,25,0.40)), radial-gradient(circle at 50% 42%, rgba(8,145,178,0.08), transparent 48%)',
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-transparent backdrop-blur-[0.3px]" />
+
+                    {/* Content — perfectly centered */}
+                    <div
+                      className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center sm:px-10"
+                    >
+                      {/* Title */}
+                      <h3
+                        className="max-w-[90%] font-bold tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+                        style={{ fontSize: 'clamp(1.5rem,2.8vw,2.2rem)' }}
+                      >
+                        {project.title}
+                      </h3>
+
+                      {/* Short description — one line */}
+                      <p className="mt-4 max-w-[70%] text-[1rem] leading-7 text-white/80 whitespace-nowrap sm:text-[1.05rem]">
+                        {project.shortDesc}
+                      </p>
+
+                      {/* Tech stack — bullet separated plain text */}
+                      <p className="mt-4 max-w-[90%] text-[0.7rem] font-semibold uppercase leading-6 tracking-[0.28em] text-[#3dd1e7] whitespace-nowrap">
+                        {project.tags.join(' • ')}
+                      </p>
+
+                      {/* Buttons */}
+                      <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
+                        <a
+                          href={project.liveDemo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex w-[140px] items-center justify-center rounded-full bg-cyan-400 px-6 py-3.5 text-[0.9rem] font-bold text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.28)] transition-all duration-300 ease-out hover:scale-108 hover:bg-cyan-300 hover:shadow-[0_0_50px_rgba(34,211,238,0.55)]"
+                        >
+                          Live Demo
+                        </a>
+                        {project.showGithub && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex w-[140px] items-center justify-center rounded-full border border-cyan-300/70 bg-slate-950/25 px-6 py-3.5 text-[0.9rem] font-bold text-cyan-300 shadow-[0_0_26px_rgba(34,211,238,0.12)] backdrop-blur-md transition-all duration-300 ease-out hover:scale-108 hover:bg-cyan-400/10 hover:text-cyan-100 hover:shadow-[0_0_45px_rgba(34,211,238,0.35)]"
+                          >
+                            GitHub
+                          </a>
+                        )}
+                      </div>
                     </div>
-                  </a>
-                </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
-                <h3 className="mt-4 text-lg font-semibold text-white">{p.title}</h3>
-                <p className="text-sm text-slate-400 mt-1">{p.desc}</p>
-
-                <ul className="mt-3 space-y-1 text-sm text-slate-300 list-disc list-inside">
-                  {p.features.map((f, idx) => (
-                    <li key={idx}>{f}</li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {activeId && (
-            <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <motion.div
-                className="relative w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-2xl"
-                initial={{ scale: 0.85, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
+              {/* Right Arrow */}
+              <button
+                aria-label="Next project"
+                onClick={handleNext}
+                className="absolute right-3 top-6 z-20 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-cyan-300/25 bg-slate-950/55 text-cyan-200 shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-300 ease-out hover:scale-115 hover:border-cyan-300/60 hover:bg-cyan-300/10 hover:text-white hover:shadow-[0_0_35px_rgba(61,209,231,0.45)] sm:static sm:h-[52px] sm:w-[52px]"
               >
+                <FiChevronRight size={24} />
+              </button>
+            </div>
+
+            {/* Dot indicators */}
+            <div className="mt-8 flex items-center justify-center gap-2.5">
+              {projects.map((_, idx) => (
                 <button
-                  className="absolute top-2 right-2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded px-3 py-1 text-sm z-10"
-                  onClick={() => setActiveId('')}
-                >
-                  Close
-                </button>
-                {!videoError ? (
-                  <video
-                    key={activeId}
-                    className="w-full aspect-video"
-                    controls
-                    src={`https://drive.google.com/uc?export=download&id=${activeId}`}
-                    onError={() => setVideoError(true)}
-                  />
-                ) : (
-                  <iframe
-                    key={`${activeId}-fallback`}
-                    className="w-full aspect-video"
-                    src={`https://drive.google.com/file/d/${activeId}/preview`}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    title="Video preview"
-                  />
-                )}
-              </motion.div>
-            </motion.div>
-          )}
+                  key={idx}
+                  aria-label={`Go to project ${idx + 1}`}
+                  onClick={() => {
+                    setDirection(idx > currentIndex ? 1 : -1)
+                    setCurrentIndex(idx)
+                  }}
+                  className={`h-2.5 rounded-full transition-all ${
+                    idx === currentIndex
+                      ? 'w-9 bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.7)]'
+                      : 'w-2.5 bg-white/20 hover:bg-cyan-200/45'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </Element>

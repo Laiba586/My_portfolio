@@ -7,17 +7,30 @@
 html, body, #root { height: 100%; }
 
 body {
-  background: theme('colors.bg');
-  background-image: theme('backgroundImage.grad-linear'), theme('backgroundImage.grad-radial'), theme('backgroundImage.grad-radial-2');
+  background: #060d1f;
+  background-image: 
+    radial-gradient(ellipse at 20% 20%, rgba(61, 209, 231, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(61, 209, 231, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(61, 209, 231, 0.03) 0%, transparent 70%),
+    linear-gradient(135deg, #060d1f 0%, #0b1020 50%, #0a1628 100%);
   background-attachment: fixed;
 }
 
 .container-max { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16; }
-.section { @apply py-10 sm:py-14 lg:py-16; }
+.section { @apply py-16 sm:py-20 lg:py-24; }
 .card { @apply bg-card/60 backdrop-blur border border-white/10 rounded-2xl; }
 .glow { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.6); animation: glow 3s infinite ease-in-out; }
 
 @keyframes glow { 50% { box-shadow: 0 0 40px 10px rgba(124, 58, 237, 0.25); } }
+
+.hero-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
 .btn-primary { @apply inline-flex items-center gap-2 bg-accent hover:bg-accent2 text-white font-semibold px-5 py-3 rounded-xl transition; }
 .btn-secondary { @apply inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-3 rounded-xl transition; }

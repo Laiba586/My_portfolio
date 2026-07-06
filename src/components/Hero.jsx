@@ -1,61 +1,84 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { FaPython, FaReact, FaDatabase, FaGitAlt, FaDocker, FaServer, FaKey, FaCode } from "react-icons/fa";
 
 export default function Hero() {
+  const [displayedText, setDisplayedText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const roles = ["Django Web Developer", "Python Backend Specialist", "Django Rest APIs Expert"];
+
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const currentWord = roles[wordIndex];
+      if (!isDeleting) {
+        setDisplayedText(currentWord.substring(0, displayedText.length + 1));
+        if (displayedText.length === currentWord.length) setIsDeleting(true);
+      } else {
+        setDisplayedText(currentWord.substring(0, displayedText.length - 1));
+        if (displayedText.length === 0) {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % roles.length);
+        }
+      }
+    }, isDeleting ? 35 : 60);
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, wordIndex]);
+
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen px-8 md:px-20 text-center overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #0f1a2e 0%, #0b1020 60%, #0b1020 100%)' }}
-    >
-      {/* Main Content */}
-      <motion.div
-        className="z-10 max-w-3xl"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-4">
-          <span className="text-white">I'm </span>
-          <span className="text-[#3dd1e7]">Laiba Aslam</span>
+    <section className="relative flex flex-col justify-center min-h-screen px-10 md:px-24 overflow-hidden" style={{ paddingTop: '9rem' }}>
+      
+      {/* LEFT SIDE: UNTOUCHED */}
+      <div className="z-10 max-w-4xl">
+        <p className="uppercase text-white text-[1.4rem] font-bold tracking-[0.25em] mb-6">Hi There, I'm</p>
+        <h1 className="text-[clamp(4rem,8vw,8rem)] font-black text-[#3dd1e7] leading-none mb-6 whitespace-nowrap" style={{ textShadow: "0 0 50px rgba(61,209,231,0.6)" }}>
+          Laiba Aslam
         </h1>
-
-        <h2 className="text-2xl md:text-3xl font-semibold text-slate-300 mb-4">
-          Django Web Developer
-        </h2>
-
-        <p className="text-slate-400 text-lg mb-8">
-          I design, develop, and deploy full stack web applications — from powerful Django REST APIs
-          to responsive, user-friendly frontends — with a passion for clean code and real-world impact.
-        </p>
-
-        {/* Buttons */}
-        <div className="flex gap-4 justify-center">
-          <a
-            href="https://drive.google.com/file/d/1wwxxYTO-1atA-Kv1AnAT3O3pf-M3JDxU/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl bg-[#3dd1e7] text-white font-semibold shadow-md hover:scale-105 transition inline-block"
-          >
-            View My Resume
-          </a>
-
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="px-6 py-3 rounded-xl border-2 border-[#3dd1e7] text-[#3dd1e7] font-semibold hover:bg-[#3dd1e7] hover:text-white transition"
-          >
-            Hire Me
-          </button>
+        {/* Cursor removed here */}
+        <div className="text-[clamp(1.4rem,3vw,2.2rem)] font-semibold text-white mb-10 min-h-[3.5rem] flex items-center">
+          {displayedText}
         </div>
-      </motion.div>
+        <div className="flex flex-wrap gap-4 mb-14">
+          <button onClick={() => scrollToSection("projects")} className="px-10 py-4 rounded-xl font-bold text-gray-900 bg-gradient-to-r from-[#3dd1e7] to-[#2aa9b0]">View My Work →</button>
+          <button onClick={() => scrollToSection("contact")} className="px-10 py-4 rounded-xl font-bold text-[#3dd1e7] border-2 border-[#3dd1e7]">Hire Me</button>
+        </div>
+      </div>
 
-      {/* Background Glow */}
-      <div className="absolute right-0 top-0 w-full h-full">
-        <div className="absolute w-full h-full bg-[radial-gradient(circle_at_80%_50%,rgba(61,209,231,0.25)_0%,transparent_70%)] animate-pulse"></div>
+      {/* RIGHT SIDE: ORB & ROTATING ICONS */}
+      <div className="absolute right-[10%] top-1/2 -translate-y-1/2 w-[400px] h-[400px] hidden lg:flex items-center justify-center pointer-events-none">
+        <div className="relative w-[400px] h-[400px] flex items-center justify-center">
+          
+          <div className="absolute w-[200px] h-[200px] rounded-full border-2 border-[#3dd1e7]/50 bg-white/5 backdrop-blur-xl shadow-[0_0_25px_rgba(61,209,231,0.4)]" />
+          
+          <motion.div 
+            className="absolute w-[300px] h-[300px] rounded-full border-2 border-[#3dd1e7]/30 shadow-[0_0_15px_#3dd1e7]"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          />
+
+          <motion.div 
+            className="absolute w-[300px] h-[300px] flex items-center justify-center"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          >
+            {[FaPython, FaCode, FaReact, FaServer, FaDatabase, FaDocker, FaGitAlt, FaKey].map((Icon, index) => (
+              <div
+                key={index}
+                className="absolute pointer-events-auto"
+                style={{ transform: `rotate(${(index / 8) * 360}deg) translate(150px) rotate(-${(index / 8) * 360}deg)` }}
+              >
+                <div className="w-12 h-12 rounded-full bg-[#0a192f]/80 border border-[#3dd1e7]/50 flex items-center justify-center text-[#3dd1e7] shadow-[0_0_15px_rgba(61,209,231,0.3)] backdrop-blur-sm cursor-pointer hover:border-white transition-colors">
+                  <Icon size={22} />
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

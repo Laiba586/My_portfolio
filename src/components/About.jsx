@@ -1,76 +1,133 @@
 import { motion } from 'framer-motion'
-import SectionTitle from './SectionTitle'
+import { FiBriefcase, FiCode, FiServer } from 'react-icons/fi'
 import profileImg from '../assets/profile.png'
+
+const stats = [
+  {
+    icon: FiBriefcase,
+    number: '1.5+',
+    label: 'Years Experience',
+  },
+  {
+    icon: FiCode,
+    number: '10+',
+    label: 'Projects Completed',
+  },
+  {
+    icon: FiServer,
+    number: '100+',
+    label: 'REST APIs EndPoints Developed',
+  },
+]
+
+const ease = [0.22, 1, 0.36, 1]
 
 export default function About() {
   return (
-    <section className="section" id="about" style={{ paddingTop: '4rem' }}>
+    <section className="section overflow-hidden" id="about">
       <div className="container-max">
-        <SectionTitle title="About Me" subtitle="Who I am and what I love to build" />
-
-        <div className="mt-10 flex flex-col md:flex-row items-center gap-10 md:gap-16">
-
-          {/* LEFT — Profile Image slides in from left */}
+        <div className="grid items-stretch gap-16 md:gap-20 lg:grid-cols-[0.4fr_0.6fr] lg:gap-[120px] xl:gap-[140px]">
           <motion.div
-            className="w-full md:w-2/5 flex justify-center"
-            initial={{ opacity: 0, x: -80 }}
+            className="relative mx-auto flex h-full w-full max-w-[480px] items-center justify-center lg:mx-0 lg:pl-8"
+            initial={{ opacity: 0, x: -28 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.8, ease }}
           >
+            <div className="absolute inset-8 rounded-[36px] bg-[#3dd1e7]/14 blur-3xl" />
             <motion.div
               animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               className="relative"
             >
-              {/* Glow ring behind image */}
-              <div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  boxShadow: '0 0 60px 20px rgba(61, 209, 231, 0.25)',
-                  borderRadius: '50%',
-                }}
-              />
-              <img
-                src={profileImg}
-                alt="Laiba Aslam"
-                className="relative z-10 w-64 h-64 md:w-72 md:h-72 rounded-full object-cover object-top border-4 border-[#3dd1e7]/60"
-                style={{
-                  maskImage: 'radial-gradient(circle, black 65%, transparent 100%)',
-                  WebkitMaskImage: 'radial-gradient(circle, black 65%, transparent 100%)',
-                }}
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-              />
+              <motion.div
+                whileHover={{ y: -5, scale: 1.015 }}
+                transition={{ duration: 0.35, ease }}
+                className="group relative overflow-hidden rounded-[30px] border border-[#3dd1e7]/24 bg-white/[0.055] p-4 shadow-[0_30px_95px_rgba(0,0,0,0.42),0_0_0_1px_rgba(255,255,255,0.035)_inset] backdrop-blur-2xl hover:border-[#3dd1e7]/45 hover:shadow-[0_38px_120px_rgba(0,0,0,0.52),0_0_54px_rgba(61,209,231,0.16)]"
+              >
+                <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent" />
+                <div className="relative overflow-hidden rounded-[22px] bg-slate-950/45">
+                  <img
+                    src={profileImg}
+                    alt="Laiba Aslam"
+                    className="aspect-[4/5] w-full object-cover object-top transition duration-700 group-hover:scale-105"
+                    style={{
+                      filter: 'brightness(0.95) contrast(1.04) saturate(0.9)',
+                    }}
+                    onError={(event) => {
+                      event.currentTarget.style.display = 'none'
+                    }}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1020]/28 via-transparent to-cyan-200/5" />
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — Description slides in from right with delay */}
           <motion.div
-            className="w-full md:w-3/5"
-            initial={{ opacity: 0, x: 80 }}
+            className="mx-auto flex h-full w-full max-w-4xl flex-col justify-center text-center lg:mx-0 lg:text-left"
+            initial={{ opacity: 0, x: 56 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.25 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.8, ease, delay: 0.08 }}
           >
-            <div className="card p-8 leading-relaxed text-slate-300 text-lg">
+            <h2 className="text-5xl font-semibold tracking-normal text-white sm:text-[56px]" style={{ fontSize: 'clamp(3rem, 5vw, 3.5rem)' }}>
+              About Me
+            </h2>
+            <p className="mt-3 text-xl font-medium text-[#3dd1e7]/90 sm:text-[22px]" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.25rem)' }}>
+              Full Stack Web Developer
+            </p>
+
+            <div className="mt-8 space-y-6 text-[18px] leading-8 text-slate-300/92 sm:text-[18px] sm:leading-9">
               <p>
-                Hi, I'm <span className="text-[#3dd1e7] font-semibold">Laiba Aslam</span> — a Django Web Developer
-                with expertise in Python, Django, Django REST Framework, and frontend technologies including
-                HTML, CSS, Bootstrap, and JavaScript.
+                Hi, I'm Laiba Aslam, a Full Stack Web Developer specializing in Python, Django, Django REST Framework, React, JavaScript, HTML and CSS.
               </p>
-              <p className="mt-4">
-                I build complete web solutions — from robust backend APIs to polished, responsive interfaces.
-                My focus is on e-commerce platforms and business websites that are fast, scalable, and user-friendly.
+
+              <p>
+                I enjoy building responsive websites, scalable REST APIs and complete web applications with clean architecture and modern UI.
               </p>
-              <p className="mt-4">
-                I'm passionate about helping small businesses and local brands establish a powerful online presence.
-                When I'm not coding, I explore new tools and better ways to build reliable, high-performance applications.
+
+              <p>
+                I'm continuously improving my skills by building real-world projects and exploring new technologies to create reliable and maintainable software.
               </p>
             </div>
-          </motion.div>
 
+            <motion.div
+              className="mt-9 grid gap-4 sm:grid-cols-3"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.12 } },
+              }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              {stats.map(({ icon: Icon, number, label }) => (
+                <motion.div
+                  key={label}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.6, ease }}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  className="group flex min-h-[156px] flex-col justify-between rounded-[22px] border border-white/10 bg-slate-950/38 p-5 shadow-[0_18px_52px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,255,255,0.025)_inset] backdrop-blur-xl transition duration-300 hover:border-[#3dd1e7]/42 hover:bg-white/[0.065] hover:shadow-[0_26px_70px_rgba(0,0,0,0.38),0_0_32px_rgba(61,209,231,0.13)]"
+                >
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#3dd1e7]/24 bg-[#3dd1e7]/10 text-[#3dd1e7] shadow-[0_0_22px_rgba(61,209,231,0.14)] transition duration-300 group-hover:text-cyan-100 group-hover:shadow-[0_0_30px_rgba(61,209,231,0.24)]">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <span className="block text-3xl font-semibold tracking-normal text-white">
+                      {number}
+                    </span>
+                    <span className="mt-2 block text-xs font-semibold uppercase leading-5 tracking-[0.16em] text-slate-400">
+                      {label}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

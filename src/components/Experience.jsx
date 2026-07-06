@@ -1,75 +1,39 @@
 import SectionTitle from './SectionTitle'
 import { motion } from 'framer-motion'
-import { SiHtml5, SiCss3, SiBootstrap, SiPython, SiDjango, SiSqlite, SiMysql, SiPostgresql } from 'react-icons/si'
-import { MdOutlineApi } from 'react-icons/md'
 
 const items = [
   {
-    title: 'Python Developer',
-    points: [
-      'My programming journey began with Python, focusing on strong foundations in logic, problem‑solving, and real‑world applications.',
-      'Topics: OOP, File & Exception Handling, Data Structures, Modules & Packages, SQLite integration, Desktop notifications, GUI with Tkinter.',
-      'Projects: Basic Calculator, Kaun Banega Crorepati (Quiz Game), Snake Water Gun Game, Rock Paper Scissors Game, Tic Tac Toe Game, Drink Water Reminder (Desktop Notification App), Secret Code Language Program, Library Management System, Clear The Clutter (File Organizer), Merge PDF App, New App in Python, E‑Commerce App Generator, Python Project – Banking System, Gardening App.'
-    ]
+    number: "01",
+    title: "Full Stack Web Development",
+    description: "Delivering complete end-to-end web applications — backend, frontend, and database working together, ready to deploy.",
+    tags: ["Django", "REST APIs", "PostgreSQL", "Deployment", "E-Commerce Ready"]
   },
   {
-    title: 'Django Developer',
-    points: [
-      'After mastering Python fundamentals, I advanced to Django to build scalable and data‑driven web applications using the MVT architecture.',
-      'Experience: Models, Views, Templates, Static & Media files, CRUD, Forms & Authentication, Admin customization, Signals, Context Processors, Template inheritance, Deployment & Debugging.',
-      'Projects: E‑Commerce Website, To‑Do List App, Weather App, TextUtils Website, Learning Management System, Blog App, AI Resume Builder & AI Analyzer.'
-    ]
+    number: "02",
+    title: "Frontend Development",
+    description: "Building responsive, clean interfaces that look great on all devices and connect seamlessly with Django backends.",
+    tags: ["HTML5", "CSS3", "Bootstrap", "JavaScript", "Django Templates"]
   },
   {
-    title: 'DRF & APIs',
-    points: [
-      'Built RESTful APIs with Django REST Framework to connect frontends with robust backends.',
-      'Token‑based authentication, Serializers & ViewSets, CRUD endpoints, External API integrations.',
-      'API testing and documentation using Postman.'
-    ]
+    number: "03",
+    title: "Backend Development",
+    description: "Building powerful, secure Django applications with clean architecture, authentication, and production-ready deployment.",
+    tags: ["Python", "Django", "DRF", "JWT Auth", "MVT Architecture"]
   },
   {
-    title: 'Databases',
-    points: [
-      'Worked with SQLite, MySQL, and PostgreSQL for production‑ready applications.',
-      'Designed schemas, optimized queries, handled migrations and relationships.',
-      'Experienced with PostgreSQL for large‑scale data storage and performance tuning.'
-    ]
+    number: "04",
+    title: "Python Programming and Automation",
+    description: "Writing efficient, production-grade Python code for automation, data processing, and complex logic — leveraging powerful libraries and tools to solve real-world problems.",
+    tags: ["Python", "OOP", "Automation Scripts", "Data Processing", "Exception Handling", "Modular Programming"]
   },
+  {
+    number: "05",
+    title: "Database Design & Optimization",
+    description: "Designing efficient database schemas, writing optimized queries, and managing migrations for reliable, scalable storage.",
+    tags: ["PostgreSQL", "MySQL", "SQLite", "Schema Design", "Query Optimization"]
+  },
+ 
 ]
-
-const expSkills = [
-  { name: 'HTML', icon: SiHtml5, color: '#E44D26' },
-  { name: 'CSS', icon: SiCss3, color: '#1572B6' },
-  { name: 'Bootstrap', icon: SiBootstrap, color: '#7952B3' },
-  { name: 'Python', icon: SiPython, color: '#3776AB' },
-  { name: 'Django', icon: SiDjango, color: '#0C4B33' },
-  { name: 'DRF / REST APIs', icon: MdOutlineApi, color: '#ef4444' },
-  { name: 'SQLite', icon: SiSqlite, color: '#0f9ed8' },
-  { name: 'MySQL', icon: SiMysql, color: '#00758F' },
-  { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
-]
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.18 }
-  }
-}
-
-const cardVariants = (idx) => ({
-  hidden: { opacity: 0, x: idx % 2 === 0 ? 60 : -60, y: 20 },
-  visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: 'easeOut' } }
-})
-
-const iconVariants = {
-  hidden: { opacity: 0, scale: 0.5 },
-  visible: (i) => ({
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, delay: i * 0.08, ease: 'easeOut' }
-  })
-}
 
 export default function Experience() {
   return (
@@ -79,99 +43,69 @@ export default function Experience() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <SectionTitle title="Working Experience & Journey" subtitle="Timeline across Python, Django, DRF, and Databases" />
+          <SectionTitle title="My Services" subtitle="What I build and deliver for clients" />
         </motion.div>
 
-        <motion.div
-          className="relative"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          <div className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-accent/70 to-accent2/70 rounded-full" />
-          <div className="space-y-8">
+        <div className="mt-12">
+          <div className="flex flex-col w-full">
             {items.map((it, idx) => (
               <motion.div
-                key={it.title}
-                className="relative sm:grid sm:grid-cols-2 gap-8 items-start"
-                variants={cardVariants(idx)}
+                key={it.number}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{ y: -4, backgroundColor: 'rgba(61,209,231,0.04)', borderColor: 'rgba(61,209,231,0.2)' }}
+                className="w-full transition-all duration-300"
               >
-                <div className={`hidden sm:block ${idx % 2 === 0 ? 'order-1' : 'order-2'}`}></div>
-                <motion.div
-                  className={`card p-6 border-white/10 ${idx % 2 === 0 ? 'sm:order-2' : 'sm:order-1'}`}
-                  whileHover={{ scale: 1.02, boxShadow: '0 0 24px rgba(61,209,231,0.18)' }}
-                  transition={{ duration: 0.25 }}
+                <div
+                  className="flex flex-col md:flex-row items-center md:items-start justify-between gap-12 rounded-2xl border border-white/5 bg-white/[0.02] p-6 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.2)] backdrop-blur-sm transition-all duration-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.3),0_0_30px_rgba(61,209,231,0.1)] hover:border-[#3dd1e7]/15"
+                  style={{ alignItems: 'center' }}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 rounded-full bg-accent shadow-glow" />
-                    <h3 className="text-xl font-bold">{it.title}</h3>
+                  {/* LEFT COLUMN */}
+                  <div className="w-full md:w-1/3 flex items-center md:items-center">
+                    <div className="flex items-center gap-4">
+                      <span style={{ color: '#3dd1e7', fontSize: '2rem', fontWeight: 900, opacity: 0.4 }}>{it.number}</span>
+                      <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)', fontWeight: 600, color: '#ffffff', margin: 0 }}>{it.title}</h3>
+                    </div>
                   </div>
-                  <ul className="mt-4 space-y-2 text-slate-300 list-disc pl-5">
-                    {it.points.map((p) => (
-                      <li key={p.substring(0, 12)}>{p}</li>
-                    ))}
-                  </ul>
-                </motion.div>
+
+                  {/* RIGHT COLUMN */}
+                  <div className="w-full md:w-2/3">
+                    <p style={{ color: '#cbd5e1', fontSize: '1.08rem', lineHeight: 1.85, margin: 0 }}>{it.description}</p>
+
+                    <div className="flex flex-wrap gap-2.5 mt-5">
+                      {it.tags.map((tag) => (
+                        <span key={tag}
+                          style={{
+                            background: 'rgba(61,209,231,0.1)',
+                            border: '1px solid rgba(61,209,231,0.35)',
+                            color: '#3dd1e7',
+                            borderRadius: '9999px',
+                            padding: '6px 14px',
+                            fontSize: '0.82rem',
+                            fontWeight: 500,
+                            whiteSpace: 'nowrap',
+                            transition: 'all 0.3s ease',
+                          }}
+                          className="hover:bg-[#3dd1e7]/15 hover:border-[#3dd1e7]/50 hover:shadow-[0_0_15px_rgba(61,209,231,0.2)]"
+                        >{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* separator: remove for last item */}
+                {idx !== items.length - 1 && (
+                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }} />
+                )}
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Skill Icons */}
-        <div className="mt-28 space-y-10">
-          <motion.div
-            className="flex flex-wrap items-center justify-center gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            {expSkills.slice(0, 5).map(({ name, icon: Icon, color }, i) => (
-              <motion.div
-                key={name}
-                custom={i}
-                variants={iconVariants}
-                whileHover={{ scale: 1.15, rotate: 4, boxShadow: '0 0 20px rgba(61,209,231,0.35)' }}
-                className="w-20 h-20 rounded-3xl ring-1 ring-[#8EE7F0] bg-[#E0F7FA] flex items-center justify-center shadow-xl shadow-black/30 cursor-pointer"
-                title={name}
-                aria-label={name}
-              >
-                {name === 'DRF / REST APIs' ? (
-                  <span className="font-extrabold" style={{ color, fontSize: 20 }}>DRF</span>
-                ) : (
-                  <Icon size={38} style={{ color }} />
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="flex flex-wrap items-center justify-center gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            {expSkills.slice(5).map(({ name, icon: Icon, color }, i) => (
-              <motion.div
-                key={name}
-                custom={i}
-                variants={iconVariants}
-                whileHover={{ scale: 1.15, rotate: -4, boxShadow: '0 0 20px rgba(61,209,231,0.35)' }}
-                className="w-20 h-20 rounded-3xl ring-1 ring-[#8EE7F0] bg-[#E0F7FA] flex items-center justify-center shadow-xl shadow-black/30 cursor-pointer"
-                title={name}
-                aria-label={name}
-              >
-                {name === 'DRF / REST APIs' ? (
-                  <span className="font-extrabold" style={{ color, fontSize: 20 }}>DRF</span>
-                ) : (
-                  <Icon size={38} style={{ color }} />
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
+
       </div>
     </section>
   )
