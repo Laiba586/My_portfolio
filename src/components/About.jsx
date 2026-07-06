@@ -71,12 +71,12 @@ export default function About() {
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.8, ease, delay: 0.08 }}
           >
-            <h2 className="text-5xl font-semibold tracking-normal text-white sm:text-[56px]" style={{ fontSize: 'clamp(3rem, 5vw, 3.5rem)' }}>
-              About Me
-            </h2>
-            <p className="mt-3 text-xl font-medium text-[#3dd1e7]/90 sm:text-[22px]" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.25rem)' }}>
-              Full Stack Web Developer
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#3dd1e7] mb-6">
+              __About Me__
             </p>
+            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              Full Stack Web Developer
+            </h2>
 
             <div className="mt-8 space-y-6 text-[18px] leading-8 text-slate-300/92 sm:text-[18px] sm:leading-9">
               <p>

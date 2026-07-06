@@ -113,7 +113,7 @@ export default function Contact() {
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           className="text-left"
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white mb-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#3dd1e7] mb-6">
             __Get in Touch__
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
@@ -140,14 +140,14 @@ export default function Contact() {
                   whileHover={{ y: -5, scale: 1.01 }}
                   className="group flex items-center gap-5 rounded-[26px] border border-white/10 bg-white/[0.055] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.30),0_0_0_1px_rgba(255,255,255,0.03)_inset] backdrop-blur-2xl transition duration-300 hover:border-cyan-300/35 hover:bg-white/[0.075] hover:shadow-[0_28px_85px_rgba(0,0,0,0.42),0_0_32px_rgba(61,209,231,0.12)]"
                 >
-                  <span className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl border border-cyan-300/25 bg-cyan-300/10 text-cyan-200 shadow-[0_0_26px_rgba(61,209,231,0.18)] transition duration-300 group-hover:scale-105 group-hover:text-white group-hover:shadow-[0_0_34px_rgba(61,209,231,0.28)]">
-                    <Icon className="h-6 w-6" />
+                  <span className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl border border-cyan-300/25 bg-cyan-300/10 text-cyan-400 shadow-[0_0_26px_rgba(61,209,231,0.18)] transition duration-300 group-hover:scale-105 group-hover:text-white group-hover:shadow-[0_0_34px_rgba(61,209,231,0.28)]">
+                    <Icon className="h-6 w-6 stroke-[2.5px]" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200/80">
+                    <span className="block text-xs font-bold uppercase tracking-[0.24em] text-cyan-400">
                       {label}
                     </span>
-                    <span className="mt-2 block break-words text-base font-medium leading-7 text-slate-100">
+                    <span className="mt-2 block break-words text-base font-semibold leading-7 text-slate-200">
                       {value}
                     </span>
                   </span>
@@ -168,7 +168,7 @@ export default function Contact() {
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
               className="rounded-[26px] border border-white/10 bg-slate-950/35 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-2xl"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
+              <p className="text-xs font-bold uppercase tracking-[0.24em] White ">
                 Connect
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
