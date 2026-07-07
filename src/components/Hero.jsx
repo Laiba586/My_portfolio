@@ -33,7 +33,7 @@ export default function Hero() {
   return (
     <section className="relative flex flex-col lg:flex-row items-center justify-center lg:justify-between min-h-screen px-6 md:px-24 overflow-x-hidden" style={{ paddingTop: '5rem' }}>
       
-      {/* LEFT SIDE */}
+      {/* LEFT SIDE: UNTOUCHED */}
       <div className="z-10 w-full max-w-4xl text-center lg:text-left flex flex-col items-center lg:items-start mt-10 lg:mt-0">
         <p className="uppercase text-white text-[1rem] sm:text-[1.4rem] font-bold tracking-[0.25em] mb-4">Hi There, I'm</p>
         
@@ -51,34 +51,35 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* RIGHT SIDE: ORBIT FIXED */}
-      <div className="relative flex items-center justify-center mt-10 lg:mt-0">
-        <div className="relative w-[500px] h-[500px] flex items-center justify-center">
+      {/* RIGHT SIDE: ORBIT FIXED FOR MOBILE */}
+      <div className="relative flex items-center justify-center mt-10 lg:mt-0 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px]">
+        <div className="relative w-full h-full flex items-center justify-center">
           
-          <div className="absolute w-[250px] h-[250px] rounded-full border-2 border-[#3dd1e7]/50 bg-white/5 backdrop-blur-xl shadow-[0_0_25px_rgba(61,209,231,0.4)]" />
+          <div className="absolute w-[150px] h-[150px] sm:w-[250px] sm:h-[250px] rounded-full border-2 border-[#3dd1e7]/50 bg-white/5 backdrop-blur-xl shadow-[0_0_25px_rgba(61,209,231,0.4)]" />
           
           <motion.div 
-            className="absolute w-[400px] h-[400px] rounded-full border-2 border-[#3dd1e7]/30 shadow-[0_0_15px_#3dd1e7]"
+            className="absolute w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] rounded-full border-2 border-[#3dd1e7]/30 shadow-[0_0_15px_#3dd1e7]"
             animate={{ rotate: 360 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           />
 
           <motion.div 
-            className="absolute w-[400px] h-[400px] flex items-center justify-center"
+            className="absolute w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] flex items-center justify-center"
             animate={{ rotate: 360 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           >
             {[FaPython, FaCode, FaReact, FaServer, FaDatabase, FaDocker, FaGitAlt, FaKey].map((Icon, index) => (
               <div
                 key={index}
-                className="absolute pointer-events-none"
+                className="absolute"
                 style={{ 
-                  /* FIX: Fixed translate value to stop morphing on different screen sizes */
-                  transform: `rotate(${(index / 8) * 360}deg) translate(200px) rotate(-${(index / 8) * 360}deg)` 
+                  // Responsive translate: mobile par 125px, desktop par 200px
+                  transform: `rotate(${(index / 8) * 360}deg) translate(125px) sm:translate(200px) rotate(-${(index / 8) * 360}deg)`,
+                  willChange: "transform" 
                 }}
               >
-                <div className="w-14 h-14 rounded-full bg-[#0a192f]/80 border border-[#3dd1e7]/50 flex items-center justify-center text-[#3dd1e7] shadow-[0_0_15px_rgba(61,209,231,0.3)] backdrop-blur-sm pointer-events-auto hover:border-white transition-colors">
-                  <Icon size={26} />
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-[#0a192f]/80 border border-[#3dd1e7]/50 flex items-center justify-center text-[#3dd1e7] shadow-[0_0_15px_rgba(61,209,231,0.3)] backdrop-blur-sm pointer-events-auto hover:border-white transition-colors">
+                  <Icon className="text-[18px] sm:text-[26px]" />
                 </div>
               </div>
             ))}
