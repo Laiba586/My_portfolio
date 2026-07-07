@@ -31,14 +31,12 @@ export default function Hero() {
   }, [displayedText, isDeleting, wordIndex]);
 
   return (
-    // FIX: overflow-x-hidden add kiya hai taake side scroll na ho
     <section className="relative flex flex-col lg:flex-row items-center justify-center lg:justify-between min-h-screen px-6 md:px-24 overflow-x-hidden" style={{ paddingTop: '5rem' }}>
       
-      {/* LEFT SIDE: Responsive layout ke liye items-center lg:items-start */}
+      {/* LEFT SIDE */}
       <div className="z-10 w-full max-w-4xl text-center lg:text-left flex flex-col items-center lg:items-start mt-10 lg:mt-0">
         <p className="uppercase text-white text-[1rem] sm:text-[1.4rem] font-bold tracking-[0.25em] mb-4">Hi There, I'm</p>
         
-        {/* FIX: whitespace-nowrap ko hataya taake mobile par wrap ho jaye aur cut na ho */}
         <h1 className="text-[clamp(2.5rem,8vw,8rem)] font-black text-[#3dd1e7] leading-none mb-6 break-words" style={{ textShadow: "0 0 50px rgba(61,209,231,0.6)" }}>
           Laiba Aslam
         </h1>
@@ -53,8 +51,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* RIGHT SIDE: ORB UNTOUCHED (Sirf container ko mobile responsive banaya) */}
-      <div className="relative flex items-center justify-center pointer-events-none mt-10 lg:mt-0 scale-75 sm:scale-90 lg:scale-100">
+      {/* RIGHT SIDE: ORBIT FIXED */}
+      <div className="relative flex items-center justify-center mt-10 lg:mt-0">
         <div className="relative w-[500px] h-[500px] flex items-center justify-center">
           
           <div className="absolute w-[250px] h-[250px] rounded-full border-2 border-[#3dd1e7]/50 bg-white/5 backdrop-blur-xl shadow-[0_0_25px_rgba(61,209,231,0.4)]" />
@@ -73,10 +71,13 @@ export default function Hero() {
             {[FaPython, FaCode, FaReact, FaServer, FaDatabase, FaDocker, FaGitAlt, FaKey].map((Icon, index) => (
               <div
                 key={index}
-                className="absolute pointer-events-auto"
-                style={{ transform: `rotate(${(index / 8) * 360}deg) translate(200px) rotate(-${(index / 8) * 360}deg)` }}
+                className="absolute pointer-events-none"
+                style={{ 
+                  /* FIX: Fixed translate value to stop morphing on different screen sizes */
+                  transform: `rotate(${(index / 8) * 360}deg) translate(200px) rotate(-${(index / 8) * 360}deg)` 
+                }}
               >
-                <div className="w-14 h-14 rounded-full bg-[#0a192f]/80 border border-[#3dd1e7]/50 flex items-center justify-center text-[#3dd1e7] shadow-[0_0_15px_rgba(61,209,231,0.3)] backdrop-blur-sm cursor-pointer hover:border-white transition-colors">
+                <div className="w-14 h-14 rounded-full bg-[#0a192f]/80 border border-[#3dd1e7]/50 flex items-center justify-center text-[#3dd1e7] shadow-[0_0_15px_rgba(61,209,231,0.3)] backdrop-blur-sm pointer-events-auto hover:border-white transition-colors">
                   <Icon size={26} />
                 </div>
               </div>
@@ -87,4 +88,3 @@ export default function Hero() {
     </section>
   );
 }
-  

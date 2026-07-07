@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-scroll'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { motion } from 'framer-motion'
-import profileImg from '../assets/profile.png'
+import profileImg from '../assets/profile1.png'
 
 const navItems = [
   { to: 'about', label: 'About' },
@@ -21,15 +21,18 @@ export default function Navbar() {
           <div className="flex items-center justify-between px-6 py-4">
             {/* Logo + Name + Photo */}
             <div className="flex items-center gap-4">
-              <img
-                src={profileImg}
-                alt="Laiba Aslam"
-                className="w-14 h-14 rounded-full object-cover border-2 border-[#3dd1e7] shadow-[0_0_20px_rgba(61,209,231,0.4)]"
-                onError={(e) => { e.currentTarget.style.display = 'none' }}
-              />
+              {/* IMAGE FIX: Border white aur shadow white kar di hai */}
+              <div className="w-14 h-14 rounded-full border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.5)] overflow-hidden bg-slate-900">
+                <img
+                  src={profileImg}
+                  alt="Laiba Aslam"
+                  className="w-full h-full object-cover object-center scale-110" 
+                  onError={(e) => { e.currentTarget.style.display = 'none' }}
+                />
+              </div>
               <div className="leading-tight">
                 <div className="text-lg sm:text-xl font-bold tracking-tight text-white">Laiba Aslam</div>
-                <div className="text-xs sm:text-sm text-slate-300">Django Web Developer</div>
+                <div className="text-xs sm:text-sm text-[#3dd1e7]">Django Web Developer</div>
               </div>
             </div>
 
@@ -62,7 +65,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-2 rounded-lg bg-white/10"
+              className="md:hidden p-2 rounded-lg bg-white/10 text-white"
               onClick={() => setOpen(!open)}
               aria-label="Toggle Menu"
             >
@@ -79,12 +82,7 @@ export default function Navbar() {
                   to={item.to}
                   smooth={true}
                   duration={700}
-                  spy={true}
-                  hashSpy={true}
-                  isDynamic={true}
-                  offset={-140}
-                  activeClass="text-accent"
-                  className="block cursor-pointer px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10"
+                  className="block cursor-pointer px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
